@@ -4,13 +4,19 @@
 {% block content %}
 
 <h1>Личный кабинет</h1>
-<div class="profile-avatar">
-    {% if user.image %}
-        <img src="/media/{{ user.image }}" alt="Аватар">
+    <div style="border: 2px solid black; width: 10%; display: flex; flex-direction: column; align-items: center;">
+    {% load static %}
+    {% if avatar.image %}
+        <img src="{{ avatar.image.url}}" alt="Аватар"  style="width: 100px">
     {% else %}
-        <img src="/media/avatars/def-avatar.jpg" alt="Дефолтный аватар">
+        <img src="/media/media/default.jpg" alt="Дефолтный аватар" style="width: 100px">
     {% endif %}
-</div>
+
+
+        <h3>{{ name }}</h3>
+        <p>{{ email }}</p>
+    </div>
+
     <h3>Ваши заявки:</h3>
     {% if user_requests %}
         <form action="{% url 'profile_filter' %}" method="get" name="filter">

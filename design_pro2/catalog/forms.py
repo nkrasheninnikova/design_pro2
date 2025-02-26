@@ -92,4 +92,4 @@ class AvatarForm(forms.Form):
 
     class Meta:
         model = Avatar
-        fields = ('image')
+        fields = ('image',)

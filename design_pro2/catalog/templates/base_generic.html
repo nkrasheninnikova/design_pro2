@@ -35,7 +35,12 @@
                 <li><a href="{% url 'index' %}">Главная</a></li>
                 {% if user.is_authenticated %}
                 <li>Пользователь: {{ user.get_username }}</li>
-                <li><a href="{% url 'logout'%}?next={{request.path}}">Выйти</a></li>
+                <li>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Выйти</button>
+                    </form>
+                </li>
                 <li><a href="{% url 'profile' %}">Личный кабинет</a></li>
                 <li><a href="{% url 'request_add' %}">Создать заявку</a></li>
                 {% if user.is_staff %}

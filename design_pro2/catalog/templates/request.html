@@ -12,10 +12,10 @@
         {% for new_req in new_requests %}
             <li>Название заявки: {{ new_req.name }}</li>
         <br>
-            <a href="/" class="btn btn-primary">
+           <a href="{% url 'request_work_change'  pk=new_req.id %}" class="btn btn-primary">
                 Изменить статус заявки на "Принято в работу"
             </a>
-            <a href="/" class="btn btn-primary">
+           <a href="{% url 'request_done_change' pk=new_req.id %}" class="btn btn-primary">
                 Изменить статус заявки на "Выполнено"
             </a>
         {% endfor %}

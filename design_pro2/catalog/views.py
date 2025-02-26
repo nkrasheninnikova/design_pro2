@@ -99,7 +99,7 @@ def request_delete_confirm(request, pk):
 def requests(request):
     new_requests = Request.objects.filter(status='Н')
     context = {'new_requests': new_requests}
-    return render(request, 'request.html', context)
+    return render(request, 'requests.html', context)
 
 @login_required
 def request_done_change(request, pk):
