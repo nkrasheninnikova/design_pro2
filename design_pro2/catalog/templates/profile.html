@@ -4,7 +4,7 @@
 {% block content %}
 
 <h1>Личный кабинет</h1>
-    <div style="border: 2px solid black; width: 10%; display: flex; flex-direction: column; align-items: center;">
+    <div style="border: 2px solid black; width: 15%; display: flex; flex-direction: column; align-items: center;">
     {% load static %}
     {% if avatar.image %}
         <img src="{{ avatar.image.url}}" alt="Аватар"  style="width: 100px">
@@ -41,7 +41,9 @@
               <li>Название заявки: {{ user_req.name }};</li>
               <li>Описание заявки: {{ user_req.description }};</li>
               <li>Категория заявки: {{ user_req.category }};</li>
-              <li>Статус заявки: {{ user_req.get_status_display }};</li>
+              <li style=" width: 250px; {% if user_req.status == 'П' %}background-color: yellow;
+                {% elif user_req.status == 'В' %}background-color: lightgreen; {% endif %}">
+                  Статус заявки: {{ user_req.get_status_display }};</li>
             {% if user_req.status == 'Н' %}
                 <a href="{% url 'request_delete' pk=user_req.id %}" class="btn btn-primary">Удалить</a>
             {% else %}
