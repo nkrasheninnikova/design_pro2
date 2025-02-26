@@ -1,0 +1,57 @@
+{% extends "base_generic.html" %}
+
+{% block title %} Профиль {% endblock %}
+{% block content %}
+
+<h1>Личный кабинет</h1>
+<div class="profile-avatar">
+    {% if user.image %}
+        <img src="/media/{{ user.image }}" alt="Аватар">
+    {% else %}
+        <img src="/media/avatars/def-avatar.jpg" alt="Дефолтный аватар">
+    {% endif %}
+</div>
+    <h3>Ваши заявки:</h3>
+    {% if user_requests %}
+        <form action="{% url 'profile_filter' %}" method="get" name="filter">
+          <h4>Статус заявки:</h4>
+            <div>
+                <select name="status">
+                    <option value="Н">Новая</option>
+                    <option value="П">Принято в работу</option>
+                    <option value="В">Выполнено</option>
+                </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Отфильтровать</button>
+        </form>
+        <br>
+        <a href="{% url 'profile' %}" class="btn btn-primary">Очистить фильтр</a>
+        <br>
+        <br>
+        <ul>
+            {% for user_req in user_requests %}
+              <li>Временная метка: {{ user_req.date }};</li>
+              <li>Название заявки: {{ user_req.name }};</li>
+              <li>Описание заявки: {{ user_req.description }};</li>
+              <li>Категория заявки: {{ user_req.category }};</li>
+              <li>Статус заявки: {{ user_req.get_status_display }};</li>
+            {% if user_req.status == 'Н' %}
+                <a href="{% url 'request_delete' pk=user_req.id %}" class="btn btn-primary">Удалить</a>
+            {% else %}
+                <span>Эта заявка не может быть удалена, так как она находится в работе или уже выполнена!</span>
+            {% endif %}
+            <br>
+            <br>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>В данный момент у вас нет заявок</p>
+        <a href="{% url 'profile' %}" class="btn btn-primary">Очистить фильтр</a>
+    {% endif %}
+    <h3>Ваши данные:</h3>
+    <ul>
+        <li>Логин: {{ user.username }}</li>
+        <li>Email: {{ user.email }}</li>
+    </ul>
+    {% endblock %}

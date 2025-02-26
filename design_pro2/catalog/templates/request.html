@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+
+{% block title %}Работа с новыми заявками{% endblock %}
+
+{% block content %}
+<h3>Работы с заявками</h3>
+
+<p>Все заявки со статусом "Новая":</p>
+{% if new_requests %}
+    <ul>
+        {% for new_req in new_requests %}
+            <li>Название заявки: {{ new_req.name }}</li>
+        <br>
+            <a href="/" class="btn btn-primary">
+                Изменить статус заявки на "Принято в работу"
+            </a>
+            <a href="/" class="btn btn-primary">
+                Изменить статус заявки на "Выполнено"
+            </a>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>В данный момент нет заявок со статусом "Новая"</p>
+{% endif %}
+{% endblock %}

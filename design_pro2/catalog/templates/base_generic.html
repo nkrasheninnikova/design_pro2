@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %} - Designpro</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Добавление дополнительного статического CSS файла -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+<header class="header">
+    <div class="header-text">
+       <h1>Welcome to Design.pro</h1>
+    </div>
+    <div class="polz">
+                {% if user.is_authenticated %}
+                   <p>Здравствуйте, {{ user.get_username }}</p>
+                {% else %}
+                   <p>Для подачи и просмотра заявок войдите в свой профиль или зарегистрируйтесь если у вас нету аккаунта</p>
+                {% endif %}
+    </div>
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            {% block sidebar %}
+            <ul class="sidebar-nav">
+                <li><a href="{% url 'index' %}">Главная</a></li>
+                {% if user.is_authenticated %}
+                <li>Пользователь: {{ user.get_username }}</li>
+                <li><a href="{% url 'logout'%}?next={{request.path}}">Выйти</a></li>
+                <li><a href="{% url 'profile' %}">Личный кабинет</a></li>
+                <li><a href="{% url 'request_add' %}">Создать заявку</a></li>
+                {% if user.is_staff %}
+                <li><a href="{% url 'requests' %}">Заявки</a></li>
+                <li><a href="{% url 'categories' %}">Категории</a></li>
+                {% endif %}
+                {% else %}
+                <li><a href="{% url 'signup' %}">Регистрация</a></li>
+                <li><a href="{% url 'login'%}?next={{request.path}}">Войти</a></li>
+                {% endif %}
+            </ul>
+            {% endblock %}
+        </div>
+        <div class="col-sm-10 ">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

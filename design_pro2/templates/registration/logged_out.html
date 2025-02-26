@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Вы вышли из системы{% endblock %}
+
+{% block content %}
+  <p>Вы вышли из системы!</p>
+
+  <a href="{% url 'login'%}">Пожалуйста, нажмите здесь, чтобы войти снова.</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить аватарку</title>
+</head>
+<body>
+<h1>Добавьте изображение для вашего профиля</h1>
+    <form method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Добавить</button>
+        <button type="submit">Пропустить</button>
+    </form>
+</body>
+</html>

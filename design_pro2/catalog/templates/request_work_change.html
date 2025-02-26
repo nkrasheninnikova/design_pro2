@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Изменение статуса заявки на "Принято в работу"{% endblock %}
+
+{% block content %}
+    <h3>Изменение статуса заявки на "Принято в работу" (требуется добавить комментарий)</h3>
+    <p>Название заявки для изменения: {{ request.title }}</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Изменить</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Подтверждение удаления заявки{% endblock %}
+
+{% block content %}
+    <h3>Вы точно уверены, что хотите удалить заявку?</h3>
+    <a href="{% url 'request_delete_confirm' pk=request.id %}" class="btn btn-primary">Подтвердить</a>
+{% endblock %}
